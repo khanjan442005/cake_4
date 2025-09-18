@@ -110,19 +110,34 @@ class SweetBitesApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            primarySwatch: Colors.pink,
-            scaffoldBackgroundColor: Colors.grey[900],
-            cardColor: Colors.grey[850],
+            primarySwatch: Colors.deepPurple,
+            scaffoldBackgroundColor: const Color(0xFF121212),
+            cardColor: const Color(0xFF1E1E1E),
             visualDensity: VisualDensity.adaptivePlatformDensity,
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.pinkAccent.withAlpha(230),
+                backgroundColor: Colors.deepPurpleAccent,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 padding: const EdgeInsets.symmetric(vertical: 16),
               ),
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFF1E1E1E),
+              elevation: 0,
+              iconTheme: IconThemeData(color: Colors.white),
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: Color(0xFF1E1E1E),
+              selectedItemColor: Colors.deepPurpleAccent,
+              unselectedItemColor: Colors.grey,
             ),
           ),
           themeMode: mode,
@@ -1085,7 +1100,7 @@ class _HomePageState extends State<HomePage> {
         ),
         const SizedBox(width: 12),
         GestureDetector(
-          onTap: () => AppState.themeMode.value = 
+          onTap: () => AppState.themeMode.value =
               AppState.themeMode.value == ThemeMode.light
                   ? ThemeMode.dark
                   : ThemeMode.light,
@@ -1178,7 +1193,7 @@ class _HomePageState extends State<HomePage> {
       shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.7,
+        childAspectRatio: 0.85,
         crossAxisSpacing: 12,
         mainAxisSpacing: 12,
       ),
@@ -1202,88 +1217,62 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: Colors.pinkAccent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: Text(
-                    'C',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                'Sweet Bites',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.favorite_border, size: 28),
-                onPressed: () => Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (_) => const WishlistPage())),
-              ),
-              IconButton(
-                icon: Stack(
-                  children: [
-                    const Icon(Icons.shopping_cart_outlined, size: 28),
-                    ValueListenableBuilder<List<CartItem>>(
-                      valueListenable: AppState.cart,
-                      builder: (context, list, _) {
-                        if (list.isEmpty) return const SizedBox.shrink();
-                        return Positioned(
-                          right: 0,
-                          top: 0,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                            constraints: const BoxConstraints(
-                              minWidth: 16,
-                              minHeight: 16,
-                            ),
-                            child: Center(
-                              child: Text(
-                                '${list.length}',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-                onPressed: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => const CartPage(autoCheckout: false))),
-              ),
-            ],
-          ),
-        ],
+    return AppBar(
+      title: Text(
+        'Sweet Bites',
+        style: GoogleFonts.dancingScript(
+          fontSize: 28,
+          color: Colors.pinkAccent,
+          fontWeight: FontWeight.w600,
+        ),
       ),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.favorite_border, size: 28),
+          onPressed: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (_) => const WishlistPage())),
+        ),
+        IconButton(
+          icon: Stack(
+            children: [
+              const Icon(Icons.shopping_cart_outlined, size: 28),
+              ValueListenableBuilder<List<CartItem>>(
+                valueListenable: AppState.cart,
+                builder: (context, list, _) {
+                  if (list.isEmpty) return const SizedBox.shrink();
+                  return Positioned(
+                    right: 0,
+                    top: 0,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 16,
+                        minHeight: 16,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${list.length}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          onPressed: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => const CartPage(autoCheckout: false))),
+        ),
+      ],
     );
   }
 

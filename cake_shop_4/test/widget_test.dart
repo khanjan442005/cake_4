@@ -11,20 +11,20 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cake_shop_4/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('SplashScreen test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(CakeShopApp());
+    await tester.pumpWidget(const SweetBitesApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Verify that SplashScreen is shown
+    expect(find.byType(SplashScreen), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Wait for 3 seconds
+    await tester.pump(const Duration(seconds: 3));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // pumpAndSettle will wait for all animations to complete
+    await tester.pumpAndSettle();
+
+    // Verify that HomePage is shown
+    expect(find.byType(HomePage), findsOneWidget);
   });
 }
