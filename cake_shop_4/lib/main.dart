@@ -4,21 +4,23 @@ import 'dart:async';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(SweetBitesApp());
+  runApp(const SweetBitesApp());
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+    Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => HomePage(),
+        builder: (context) => const HomePage(),
       ));
     });
   }
@@ -26,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF9F6F3), // cream color background
+      backgroundColor: const Color(0xFFF9F6F3), // cream color background
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -124,7 +126,7 @@ class SweetBitesApp extends StatelessWidget {
             ),
           ),
           themeMode: mode,
-          home: SplashScreen(),
+          home: const SplashScreen(),
         );
       },
     );
@@ -1069,7 +1071,7 @@ class _HomePageState extends State<HomePage> {
                 onChanged: (v) => AppState.searchQuery.value = v,
                 decoration: InputDecoration(
                   hintText: 'Search cakes, e.g. Chocolate',
-                  prefixIcon: Icon(Icons.search),
+                  prefixIcon: const Icon(Icons.search),
                   filled: true,
                   fillColor: Theme.of(context).cardColor,
                   border: OutlineInputBorder(
@@ -1081,14 +1083,14 @@ class _HomePageState extends State<HomePage> {
             },
           ),
         ),
-        SizedBox(width: 12),
+        const SizedBox(width: 12),
         GestureDetector(
-          onTap: () => AppState.themeMode.value =
+          onTap: () => AppState.themeMode.value = 
               AppState.themeMode.value == ThemeMode.light
                   ? ThemeMode.dark
                   : ThemeMode.light,
           child: Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).cardColor,
@@ -1172,9 +1174,9 @@ class _HomePageState extends State<HomePage> {
   Widget buildGrid() {
     final list = filteredCakes();
     return GridView.builder(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 0.7,
         crossAxisSpacing: 12,
@@ -1384,8 +1386,8 @@ class _CakeCardState extends State<CakeCard> {
                               addToCartAndMaybeCheckout(false);
                             },
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                              textStyle: TextStyle(fontSize: 12)
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              textStyle: const TextStyle(fontSize: 12)
                             ),
                             child: const Text('Add'),
                           ),
@@ -1395,8 +1397,8 @@ class _CakeCardState extends State<CakeCard> {
                               addToCartAndMaybeCheckout(true);
                             },
                             style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                              textStyle: TextStyle(fontSize: 12)
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              textStyle: const TextStyle(fontSize: 12)
                             ),
                             child: const Text('Buy'),
                           ),
